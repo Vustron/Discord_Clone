@@ -1,9 +1,11 @@
 'use client';
 
 import * as z from 'zod';
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { formSchema } from '@/lib/validation';
 import { zodResolver } from '@hookform/resolvers/zod';
+
 import {
 	Dialog,
 	DialogContent,
@@ -12,6 +14,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from '@/components/ui/dialog';
+
 import {
 	Form,
 	FormControl,
@@ -22,6 +25,7 @@ import {
 } from '@/components/ui/form';
 
 import useMounted from '@/hooks/useMounted';
+import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import FileUpload from '@/components/forms/FileUpload';
@@ -29,6 +33,9 @@ import FileUpload from '@/components/forms/FileUpload';
 export const InitialModal = () => {
 	// fix hydration error
 	const isMounted = useMounted();
+
+	// init router
+	const router = useRouter();
 
 	// init form
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -44,7 +51,14 @@ export const InitialModal = () => {
 
 	// submit function
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
-		console.log(values);
+		try {
+			await axios.post('/api/servers', values);
+			form.reset();
+			router.refresh();
+			window.location.reload();
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	if (!isMounted) {
