@@ -1,10 +1,8 @@
 'use client';
 
-import * as z from 'zod';
-import { useForm } from 'react-hook-form';
-import { formSchema } from '@/lib/validation';
+import Image from 'next/image';
+import { X } from 'lucide-react';
 import { UploadDropzone } from '@/lib/uploadthing';
-import { zodResolver } from '@hookform/resolvers/zod';
 
 interface FileUploadProps {
 	endpoint: 'messageFile' | 'serverImage';
@@ -14,6 +12,17 @@ interface FileUploadProps {
 
 // TODO: add toast
 const FileUpload = ({ endpoint, value, onChange }: FileUploadProps) => {
+	// file check
+	const fileType = value?.split('.').pop();
+
+	if (value && fileType !== 'pdf') {
+		return (
+			<div className='relative h-20 w-20'>
+				<Image fill src={value} alt='upload' className='rounded-full' />
+			</div>
+		);
+	}
+
 	return (
 		<UploadDropzone
 			endpoint={endpoint}

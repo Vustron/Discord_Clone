@@ -4,9 +4,11 @@
         "hookform",
         "lucide",
         "nextjs",
+        "placehold",
         "tailwindcss",
         "trpc",
-        "Uploadthing"
+        "Uploadthing",
+        "utfs"
     ],
     "WillLuke.nextjs.addTypesOnSave": true,
     "WillLuke.nextjs.hasPrompted": true
