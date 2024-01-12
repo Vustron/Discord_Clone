@@ -1,12 +1,12 @@
 'use client';
 
 import { Plus } from 'lucide-react';
-import { Tooltip } from '@/components/ui/tooltip';
+import { ActionTooltip } from '../ui/action-tooltip';
 
 const SidebarActions = () => {
 	return (
 		<div>
-			<Tooltip>
+			<ActionTooltip side='right' align='center' label='Add a server'>
 				<button className='group flex items-center'>
 					<div
 						className='flex mx-3 h-[48px] w-[48px] 
@@ -22,7 +22,7 @@ const SidebarActions = () => {
 						/>
 					</div>
 				</button>
-			</Tooltip>
+			</ActionTooltip>
 		</div>
 	);
 };
