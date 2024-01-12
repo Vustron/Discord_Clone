@@ -20,10 +20,14 @@ import {
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form';
+import useMounted from '@/hooks/useMounted';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
 export const InitialModal = () => {
+	// fix hydration error
+	const isMounted = useMounted();
+
 	// init form
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -40,6 +44,10 @@ export const InitialModal = () => {
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		console.log(values);
 	};
+
+	if (!isMounted) {
+		return null;
+	}
 
 	return (
 		<Dialog open={true}>
