@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import { UserButton } from '@clerk/nextjs';
 
 export default function Home() {
@@ -7,7 +6,6 @@ export default function Home() {
 			<h1 className='text-3xl font-bold text-indigo-500'>
 				<UserButton afterSignOutUrl='/' />
 			</h1>
-			<Button>Click me</Button>
 		</div>
 	);
 }
