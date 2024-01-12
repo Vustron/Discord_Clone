@@ -3,7 +3,8 @@
         "clsx",
         "hookform",
         "lucide",
-        "nextjs"
+        "nextjs",
+        "Uploadthing"
     ],
     "WillLuke.nextjs.addTypesOnSave": true,
     "WillLuke.nextjs.hasPrompted": true
