@@ -20,9 +20,11 @@ import {
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form';
+
 import useMounted from '@/hooks/useMounted';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import FileUpload from '@/components/forms/FileUpload';
 
 export const InitialModal = () => {
 	// fix hydration error
@@ -67,7 +69,21 @@ export const InitialModal = () => {
 					<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
 						<div className='space-y-8 px-6'>
 							<div className='flex items-center justify-center text-center'>
-								<p>Todo image upload</p>
+								<FormField
+									control={form.control}
+									name='imageUrl'
+									render={({ field }) => (
+										<FormItem>
+											<FormControl>
+												<FileUpload
+													endpoint='serverImage'
+													value={field.value}
+													onChange={field.onChange}
+												/>
+											</FormControl>
+										</FormItem>
+									)}
+								/>
 							</div>
 
 							<FormField

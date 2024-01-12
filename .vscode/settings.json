@@ -4,6 +4,8 @@
         "hookform",
         "lucide",
         "nextjs",
+        "tailwindcss",
+        "trpc",
         "Uploadthing"
     ],
     "WillLuke.nextjs.addTypesOnSave": true,
