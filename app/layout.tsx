@@ -1,4 +1,5 @@
 import './globals.css';
+import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
@@ -19,11 +20,11 @@ export default function RootLayout({
 	return (
 		<ClerkProvider>
 			<html lang='en' suppressHydrationWarning>
-				<body className={font.className}>
+				<body className={cn(font.className, 'bg-white dark:bg-[#313338]')}>
 					<ThemeProvider
 						attribute='class'
 						defaultTheme='dark'
-						enableSystem={false}
+						enableSystem
 						storageKey='discord-theme'
 					>
 						{children}
