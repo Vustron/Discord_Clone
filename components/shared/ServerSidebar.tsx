@@ -1,4 +1,5 @@
 import { fetchCurrentProfile } from '@/lib/actions/FetchCurrentProfile';
+import ServerHeader from '@/components/shared/ServerHeader';
 import { redirectToSignIn } from '@clerk/nextjs';
 import { db } from '@/lib/actions/InitializeDB';
 import { ChannelType } from '@prisma/client';
@@ -66,7 +67,9 @@ const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
 	)?.role;
 
 	return (
-		<div className='flex flex-col h-full text-primary w-full dark:bg-[#2B2D31] bg-[#F2F3F5]'></div>
+		<div className='flex flex-col h-full text-primary w-full dark:bg-[#2B2D31] bg-[#F2F3F5]'>
+			<ServerHeader server={server} role={role} />
+		</div>
 	);
 };
 
