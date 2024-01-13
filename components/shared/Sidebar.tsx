@@ -1,10 +1,12 @@
 import { fetchCurrentProfile } from '@/lib/actions/FetchCurrentProfile';
 import SidebarActions from '@/components/shared/SidebarActions';
+import { ModeToggle } from '@/components/shared/ThemeToggle';
 import SidebarItems from '@/components/shared/SidebarItems';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { db } from '@/lib/actions/InitializeDB';
 import { redirect } from 'next/navigation';
+import { UserButton } from '@clerk/nextjs';
 
 const Sidebar = async () => {
 	// fetch user profile
@@ -43,6 +45,18 @@ const Sidebar = async () => {
 					</div>
 				))}
 			</ScrollArea>
+
+			<div className='pb-3 mt-auto flex items-center flex-col gap-y-4'>
+				<ModeToggle />
+				<UserButton
+					afterSignOutUrl='/'
+					appearance={{
+						elements: {
+							avatarBox: 'h-[48px] w-[48px]',
+						},
+					}}
+				/>
+			</div>
 		</div>
 	);
 };
