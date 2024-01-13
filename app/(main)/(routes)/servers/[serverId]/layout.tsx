@@ -1,5 +1,5 @@
 import { fetchCurrentProfile } from '@/lib/actions/FetchCurrentProfile';
-import ServerSidebar from '@/components/shared/ServerSidebar';
+import ServerSidebar from '@/components/server/ServerSidebar';
 import { redirectToSignIn } from '@clerk/nextjs';
 import { db } from '@/lib/actions/InitializeDB';
 import { redirect } from 'next/navigation';

@@ -1,5 +1,5 @@
 import { fetchCurrentProfile } from '@/lib/actions/FetchCurrentProfile';
-import ServerHeader from '@/components/shared/ServerHeader';
+import ServerHeader from '@/components/server/ServerHeader';
 import { redirectToSignIn } from '@clerk/nextjs';
 import { db } from '@/lib/actions/InitializeDB';
 import { ChannelType } from '@prisma/client';
