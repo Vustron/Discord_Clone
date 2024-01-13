@@ -1,16 +1,17 @@
 {
-    "cSpell.words": [
-        "clsx",
-        "hookform",
-        "lucide",
-        "nextjs",
-        "placehold",
-        "tailwindcss",
-        "trpc",
-        "Uploadthing",
-        "utfs",
-        "uuidv"
-    ],
-    "WillLuke.nextjs.addTypesOnSave": true,
-    "WillLuke.nextjs.hasPrompted": true
+	"cSpell.words": [
+		"clsx",
+		"hookform",
+		"lucide",
+		"nextjs",
+		"placehold",
+		"tailwindcss",
+		"trpc",
+		"Uploadthing",
+		"utfs",
+		"uuidv",
+		"zustand"
+	],
+	"WillLuke.nextjs.addTypesOnSave": true,
+	"WillLuke.nextjs.hasPrompted": true
 }
