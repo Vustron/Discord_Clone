@@ -1,5 +1,6 @@
 'use client';
 
+import { CreateChannelModal } from '@/components/modals/CreateChannelModal';
 import { CreateServerModal } from '@/components/modals/CreateServerModal';
 import { EditServerModal } from '@/components/modals/EditServerModal';
 import { MembersModal } from '@/components/modals/MembersModal';
@@ -20,6 +21,7 @@ export const ModalProvider = () => {
 			<InviteModal />
 			<EditServerModal />
 			<MembersModal />
+			<CreateChannelModal />
 		</>
 	);
 };
