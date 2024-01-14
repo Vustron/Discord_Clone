@@ -14,16 +14,19 @@ export async function DELETE(
 		// fetch serverId
 		const serverId = searchParams.get('serverId');
 
+		// if there's no profile throw an error
 		if (!profile) {
 			return new NextResponse('Unauthorized', { status: 401 });
 		}
 
+		// if there's no serverId throw an error
 		if (!serverId) {
-			return new NextResponse('Server ID Missing', { status: 401 });
+			return new NextResponse('Server ID Missing', { status: 400 });
 		}
 
+		// if there's no memberId throw an error
 		if (!params.memberId) {
-			return new NextResponse('Member ID Missing', { status: 401 });
+			return new NextResponse('Member ID Missing', { status: 400 });
 		}
 
 		const server = await db.server.update({
@@ -79,11 +82,11 @@ export async function PATCH(
 		}
 
 		if (!serverId) {
-			return new NextResponse('Server ID Missing', { status: 401 });
+			return new NextResponse('Server ID Missing', { status: 400 });
 		}
 
 		if (!params.memberId) {
-			return new NextResponse('Member ID Missing', { status: 401 });
+			return new NextResponse('Member ID Missing', { status: 400 });
 		}
 
 		const server = await db.server.update({
