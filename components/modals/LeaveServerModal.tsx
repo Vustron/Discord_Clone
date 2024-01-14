@@ -15,7 +15,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
-export const LeaverServerModal = () => {
+export const LeaveServerModal = () => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	// init use Modal
