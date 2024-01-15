@@ -1,12 +1,15 @@
 import { fetchCurrentProfile } from '@/lib/actions/FetchCurrentProfile';
+import { iconMap, roleIconMap } from '@/constants/channelType';
+import ServerChannel from '@/components/server/ServerChannel';
+import ServerSection from '@/components/server/ServerSection';
 import ServerHeader from '@/components/server/ServerHeader';
 import ServerSearch from '@/components/server/ServerSearch';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Separator } from '@/components/ui/separator';
 import { redirectToSignIn } from '@clerk/nextjs';
 import { db } from '@/lib/actions/InitializeDB';
 import { ChannelType } from '@prisma/client';
 import { redirect } from 'next/navigation';
-import { iconMap, roleIconMap } from '@/constants/channelType';
 
 interface ServerSidebarProps {
 	serverId: string;
@@ -116,6 +119,26 @@ const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
 						]}
 					/>
 				</div>
+
+				<Separator className='bg-zinc-200 dark:bg-zinc-700 rounded-md my-2' />
+				{!!textChannels?.length && (
+					<div>
+						<ServerSection
+							sectionType='channels'
+							channelType={ChannelType.TEXT}
+							role={role}
+							label='Text Channels'
+						/>
+						{textChannels.map((channel) => (
+							<ServerChannel
+								key={channel.id}
+								channel={channel}
+								role={role}
+								server={server}
+							/>
+						))}
+					</div>
+				)}
 			</ScrollArea>
 		</div>
 	);
