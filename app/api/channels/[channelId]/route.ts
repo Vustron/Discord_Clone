@@ -60,3 +60,75 @@ export async function DELETE(
 		return new NextResponse('Internal Error', { status: 500 });
 	}
 }
+
+export async function PATCH(
+	req: Request,
+	{ params }: { params: { channelId: string } }
+) {
+	try {
+		// fetch user profile from database
+		const profile = await fetchCurrentProfile();
+		// init search params
+		const { searchParams } = new URL(req.url);
+		// init name and type
+		const { name, type } = await req.json();
+		// fetch serverId
+		const serverId = searchParams.get('serverId');
+
+		// if there's no profile throw an error
+		if (!profile) {
+			return new NextResponse('Unauthorized', { status: 401 });
+		}
+
+		// if there's no serverId throw an error
+		if (!serverId) {
+			return new NextResponse('Server ID Missing', { status: 400 });
+		}
+
+		// if there's no channelId throw an error
+		if (!params.channelId) {
+			return new NextResponse('Channel ID Missing', { status: 400 });
+		}
+
+		if (name === 'general' || name === 'General') {
+			return new NextResponse("Name cannot be 'general' or 'General'", {
+				status: 400,
+			});
+		}
+
+		const server = await db.server.update({
+			where: {
+				id: serverId,
+				members: {
+					some: {
+						profileId: profile.id,
+						role: {
+							in: [MemberRole.ADMIN, MemberRole.MODERATOR],
+						},
+					},
+				},
+			},
+			data: {
+				channels: {
+					update: {
+						where: {
+							id: params.channelId,
+							NOT: {
+								name: 'general' || 'General',
+							},
+						},
+						data: {
+							name,
+							type,
+						},
+					},
+				},
+			},
+		});
+
+		return NextResponse.json(server);
+	} catch (error) {
+		console.log('[CHANNEL_ID_PATCH]', error);
+		return new NextResponse('Internal Error', { status: 500 });
+	}
+}
