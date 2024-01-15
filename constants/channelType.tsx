@@ -14,3 +14,9 @@ export const roleIconMap = {
 	),
 	[MemberRole.ADMIN]: <ShieldAlert className='text-rose-500 mr-2 h-4 w-4' />,
 };
+
+export const iconChannelMap = {
+	[ChannelType.TEXT]: Hash,
+	[ChannelType.AUDIO]: Mic,
+	[ChannelType.VIDEO]: Video,
+};
