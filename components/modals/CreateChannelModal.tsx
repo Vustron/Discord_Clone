@@ -37,11 +37,13 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 import { ChannelType } from '@prisma/client';
+import { useEffect } from 'react';
 
 export const CreateChannelModal = () => {
 	// init use Modal
-	const { isOpen, onClose, type } = useModal();
+	const { isOpen, onClose, type, data } = useModal();
 	const isModalOpen = isOpen && type === 'createChannel';
+	const { channelType } = data;
 
 	// init params
 	const params = useParams();
@@ -54,9 +56,18 @@ export const CreateChannelModal = () => {
 		resolver: zodResolver(formChannelSchema),
 		defaultValues: {
 			name: '',
-			type: ChannelType.TEXT,
+			type: channelType || ChannelType.TEXT,
 		},
 	});
+
+	//set default value to a specific channel type
+	useEffect(() => {
+		if (channelType) {
+			form.setValue('type', channelType);
+		} else {
+			form.setValue('type', ChannelType.TEXT);
+		}
+	}, [channelType, form]);
 
 	// init form state
 	const isLoading = form.formState.isSubmitting;
@@ -80,6 +91,7 @@ export const CreateChannelModal = () => {
 		}
 	};
 
+	// close modal
 	const handleClose = () => {
 		form.reset();
 		onClose();
