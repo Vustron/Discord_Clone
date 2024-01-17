@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
+import QueryProvider from '@/components/providers/QueryProvider';
 import { ModalProvider } from '@/components/providers/ModalProvider';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { SocketProvider } from '@/components/providers/SocketProvider';
@@ -31,7 +32,7 @@ export default function RootLayout({
 					>
 						<SocketProvider>
 							<ModalProvider />
-							{children}
+							<QueryProvider>{children}</QueryProvider>
 						</SocketProvider>
 					</ThemeProvider>
 				</body>
