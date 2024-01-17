@@ -34,3 +34,7 @@ export const formMessageFileSchema = z.object({
 		message: 'Attachment is required',
 	}),
 });
+
+export const formChatItemSchema = z.object({
+	content: z.string().min(1),
+});
