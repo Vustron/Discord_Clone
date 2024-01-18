@@ -80,9 +80,21 @@ const ChatItem = ({
 	}, [content]);
 
 	// submit function
-	const onSubmit = (values: z.infer<typeof formChatItemSchema>) => {
-		console.log(values);
+	const onSubmit = async (values: z.infer<typeof formChatItemSchema>) => {
+		try {
+			const url = qs.stringifyUrl({
+				url: `${socketUrl}/${id}`,
+				query: socketQuery,
+			});
+
+			await axios.patch(url, values);
+		} catch (error) {
+			console.log(error);
+		}
 	};
+
+	// init loading state
+	const isLoading = form.formState.isSubmitting;
 
 	// escape key function
 	useEffect(() => {
@@ -197,6 +209,7 @@ const ChatItem = ({
 											<FormControl>
 												<div className='relative w-full'>
 													<Input
+														disabled={isLoading}
 														className='p-2 bg-zinc-200/90 dark:bg-zinc-700/75
                                                             border-0 focus-visible:ring-0 focus-visible:ring-offset-0
                                                             text-zinc-600 dark:text-zinc-200'
