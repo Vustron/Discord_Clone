@@ -7,6 +7,7 @@ import UserAvatar from '@/components/shared/UserAvatar';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { formChatItemSchema } from '@/lib/validation';
 import { Edit, FileIcon, Trash } from 'lucide-react';
+import { useModal } from '@/hooks/useModalStore';
 import { roleIconMap } from '@/constants/roles';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -45,9 +46,11 @@ const ChatItem = ({
 	socketUrl,
 	socketQuery,
 }: ChatItemProps) => {
+	// init modal
+	const { onOpen } = useModal();
+
 	// init edit and delete state
 	const [isEditing, setIsEditing] = useState(false);
-	const [isDeleting, setIsDeleting] = useState(false);
 
 	// init file type
 	const fileType = fileUrl?.split('.').pop();
@@ -88,6 +91,9 @@ const ChatItem = ({
 			});
 
 			await axios.patch(url, values);
+
+			form.reset();
+			setIsEditing(false);
 		} catch (error) {
 			console.log(error);
 		}
@@ -254,6 +260,12 @@ const ChatItem = ({
 					{canDeleteMessage && (
 						<ActionTooltip label='Delete'>
 							<Trash
+								onClick={() =>
+									onOpen('deleteMessage', {
+										apiUrl: `${socketUrl}/${id}`,
+										query: socketQuery,
+									})
+								}
 								className='cursor-pointer ml-auto w-4 h-4 text-zinc-500
                             hover:text-red-600 transition'
 							/>
