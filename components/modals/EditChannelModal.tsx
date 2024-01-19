@@ -3,6 +3,7 @@
 import * as z from 'zod';
 import axios from 'axios';
 import qs from 'query-string';
+import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { formChannelSchema } from '@/lib/validation';
@@ -83,8 +84,10 @@ export const EditChannelModal = () => {
 			form.reset();
 			onClose();
 			router.refresh();
+			toast.success('Channel modified successfully');
 		} catch (error) {
 			console.log(error);
+			toast.error(`Channel modification error: ${error}`);
 		}
 	};
 

@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { toast } from 'sonner';
 import { FileIcon, X } from 'lucide-react';
 import { UploadDropzone } from '@/lib/uploadthing';
 
@@ -10,7 +11,6 @@ interface FileUploadProps {
 	onChange: (url?: string) => void;
 }
 
-// TODO: add toast
 const FileUpload = ({ endpoint, value, onChange }: FileUploadProps) => {
 	// file check
 	const fileType = value?.split('.').pop();

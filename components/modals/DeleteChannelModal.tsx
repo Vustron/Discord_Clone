@@ -13,6 +13,7 @@ import { useModal } from '@/hooks/useModalStore';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import qs from 'query-string';
 import axios from 'axios';
 
@@ -46,8 +47,10 @@ export const DeleteChannelModal = () => {
 			onClose();
 			router.push(`/servers/${server?.id}`);
 			router.refresh();
+			toast.success('Channel deleted successfully');
 		} catch (error) {
 			console.log(error);
+			toast.error(`Channel deletion error: ${error}`);
 		} finally {
 			setIsLoading(false);
 		}

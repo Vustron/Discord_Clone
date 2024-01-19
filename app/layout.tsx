@@ -1,8 +1,10 @@
 import './globals.css';
 import { cn } from '@/lib/utils';
+import { dark } from '@clerk/themes';
 import type { Metadata } from 'next';
 import { Open_Sans } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
+import { Toaster } from '@/components/ui/sonner';
 import QueryProvider from '@/components/providers/QueryProvider';
 import { ModalProvider } from '@/components/providers/ModalProvider';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
@@ -21,7 +23,11 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<ClerkProvider>
+		<ClerkProvider
+			appearance={{
+				baseTheme: dark,
+			}}
+		>
 			<html lang='en' suppressHydrationWarning>
 				<body className={cn(font.className, 'bg-white dark:bg-[#313338]')}>
 					<ThemeProvider
@@ -33,6 +39,7 @@ export default function RootLayout({
 						<SocketProvider>
 							<ModalProvider />
 							<QueryProvider>{children}</QueryProvider>
+							<Toaster position='top-center' expand={true} richColors />
 						</SocketProvider>
 					</ThemeProvider>
 				</body>

@@ -13,6 +13,7 @@ import { useModal } from '@/hooks/useModalStore';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import qs from 'query-string';
 import axios from 'axios';
 
@@ -43,8 +44,10 @@ export const DeleteMessageModal = () => {
 
 			onClose();
 			router.refresh();
+			toast.success('Message deleted successfully');
 		} catch (error) {
 			console.log(error);
+			toast.error(`Message deletion error: ${error}`);
 		} finally {
 			setIsLoading(false);
 		}

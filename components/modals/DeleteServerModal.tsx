@@ -11,9 +11,10 @@ import {
 
 import { useModal } from '@/hooks/useModalStore';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { toast } from 'sonner';
+import axios from 'axios';
 
 export const DeleteServerModal = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -38,8 +39,10 @@ export const DeleteServerModal = () => {
 			onClose();
 			router.refresh();
 			router.push('/');
+			toast.success('Server deleted successfully');
 		} catch (error) {
 			console.log(error);
+			toast.error(`Server deletion error: ${error}`);
 		} finally {
 			setIsLoading(false);
 		}

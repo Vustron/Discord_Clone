@@ -18,11 +18,12 @@ import {
 
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 
+import { toast } from 'sonner';
 import useMounted from '@/hooks/useMounted';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import FileUpload from '@/components/forms/FileUpload';
 import { useModal } from '@/hooks/useModalStore';
+import FileUpload from '@/components/forms/FileUpload';
 
 export const MessageFileModal = () => {
 	// init modal
@@ -63,10 +64,12 @@ export const MessageFileModal = () => {
 			});
 
 			form.reset();
-			router.refresh();
 			onClose();
+			router.refresh();
+			toast.success('Sent successfully');
 		} catch (error) {
 			console.log(error);
+			toast.error(`Message sending error: ${error}`);
 		}
 	};
 

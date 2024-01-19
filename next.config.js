@@ -7,6 +7,9 @@ const nextConfig = {
 		});
 		return config;
 	},
+	swcMinify: false,
+	reactStrictMode: true,
+	compress: true,
 	images: {
 		remotePatterns: [
 			{

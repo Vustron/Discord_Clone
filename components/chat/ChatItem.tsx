@@ -88,7 +88,7 @@ const ChatItem = ({
 		form.reset({
 			content: content,
 		});
-	}, [content]);
+	}, [content, form]);
 
 	// submit function
 	const onSubmit = async (values: z.infer<typeof formChatItemSchema>) => {

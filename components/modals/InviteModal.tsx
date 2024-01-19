@@ -14,6 +14,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { useOrigin } from '@/hooks/useOrigin';
 import { useState } from 'react';
+import { toast } from 'sonner';
 import axios from 'axios';
 
 export const InviteModal = () => {
@@ -54,8 +55,10 @@ export const InviteModal = () => {
 			);
 
 			onOpen('invite', { server: response.data });
+			toast.success('Invite Link created successfully');
 		} catch (error) {
 			console.log(error);
+			toast.error(`Invite Link creation error: ${error}`);
 		} finally {
 			setIsLoading(false);
 		}

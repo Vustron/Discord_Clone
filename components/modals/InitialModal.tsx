@@ -2,6 +2,7 @@
 
 import * as z from 'zod';
 import axios from 'axios';
+import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
 import { formSchema } from '@/lib/validation';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -53,11 +54,14 @@ export const InitialModal = () => {
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		try {
 			await axios.post('/api/servers', values);
+
 			form.reset();
 			router.refresh();
 			window.location.reload();
+			toast.success('Server created successfully');
 		} catch (error) {
 			console.log(error);
+			toast.error(`Server creation error: ${error}`);
 		}
 	};
 

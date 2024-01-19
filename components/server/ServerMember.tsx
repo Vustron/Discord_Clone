@@ -45,7 +45,9 @@ const ServerMember = ({ member, server }: ServerMemberProps) => {
 						'text-primary dark:text-zinc-200 dark:group-hover:text-white'
 				)}
 			>
-				{member.profile.name}
+				{member.profile.name.length > 15
+					? `${member.profile.name.slice(0, 15)}...`
+					: member.profile.name}
 			</p>
 		</button>
 	);

@@ -11,9 +11,10 @@ import {
 
 import { useModal } from '@/hooks/useModalStore';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { toast } from 'sonner';
+import axios from 'axios';
 
 export const LeaveServerModal = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -38,8 +39,10 @@ export const LeaveServerModal = () => {
 			onClose();
 			router.refresh();
 			router.push('/');
+			toast.success('Leaved the server successfully');
 		} catch (error) {
 			console.log(error);
+			toast.error(`Unable to leave the server, error: ${error}`);
 		} finally {
 			setIsLoading(false);
 		}

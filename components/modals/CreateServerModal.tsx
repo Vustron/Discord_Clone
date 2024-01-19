@@ -2,6 +2,7 @@
 
 import * as z from 'zod';
 import axios from 'axios';
+import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
 import { formSchema } from '@/lib/validation';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -54,11 +55,14 @@ export const CreateServerModal = () => {
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		try {
 			await axios.post('/api/servers', values);
+
 			form.reset();
-			router.refresh();
 			onClose();
+			router.refresh();
+			toast.success('Server created successfully');
 		} catch (error) {
 			console.log(error);
+			toast.error(`Server creation error: ${error}`);
 		}
 	};
 
@@ -84,7 +88,7 @@ export const CreateServerModal = () => {
 				<Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
 						<div className='space-y-8 px-6'>
-							<div className='flex items-center justify-center text-center'>
+							<div className='flex items-center justify-center text-center dark:bg-white'>
 								<FormField
 									control={form.control}
 									name='imageUrl'
@@ -107,7 +111,7 @@ export const CreateServerModal = () => {
 								name='name'
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
+										<FormLabel className='uppercase text-xs font-bold text-zinc-500'>
 											Server Name
 										</FormLabel>
 
@@ -119,6 +123,7 @@ export const CreateServerModal = () => {
 												border-0 
 												focus-visible:ring-0 
 												text-black 
+												
 												focus-visible:ring-offset-0
 												'
 												placeholder='Enter server name'

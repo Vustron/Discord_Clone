@@ -3,6 +3,7 @@
 import * as z from 'zod';
 import axios from 'axios';
 import qs from 'query-string';
+import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
 import { formChannelSchema } from '@/lib/validation';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -87,8 +88,10 @@ export const CreateChannelModal = () => {
 			form.reset();
 			onClose();
 			router.refresh();
+			toast.success('Channel created successfully');
 		} catch (error) {
 			console.log(error);
+			toast.error(`Channel creation error: ${error}`);
 		}
 	};
 
@@ -114,7 +117,7 @@ export const CreateChannelModal = () => {
 								name='name'
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel className='uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70'>
+										<FormLabel className='uppercase text-xs font-bold text-zinc-500'>
 											Channel name
 										</FormLabel>
 										<FormControl>
